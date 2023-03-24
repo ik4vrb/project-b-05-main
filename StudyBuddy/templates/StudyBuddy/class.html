@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Class{% endblock %}
+{% block content %}
+
+<style>
+  .row {
+    justify-content: center;
+  }
+  .column {
+    width: 200px;
+  }
+</style>
+
+<body>
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <h2> CLASSES </h2>
+  <div class="titleDiv"></div>
+
+   <form action="{% url 'searchCourse' dep %}" method="GET">
+    <div class="searchDiv">
+      <input type="text" name="search" placeholder="class number ex: 3100"/>
+      <button type="submit" class="btn btn-light">Search</button>
+    </div>
+  </form>
+  
+  {% for course in courses %}
+    <b> {{dep}} {{course.catalog_number}} </b>
+    <i>{{course.description}}</i>
+
+    {% for detail in course.meetings %}
+      <p> {{detail.days}} {{detail.start_time}} - {{detail.end_time}}</p>
+    {% endfor %}
+    
+    <div class="row">
+      <div class="column">
+        <form action="{% url 'show_classes' dep %}" method="POST">
+          {% csrf_token %}
+          <input type = "hidden" name = "name" value = "{{course.description}}" />
+          <input type = "hidden" name = "professor" value = "{{course.instructor.name}}" />
+          <input type = "hidden" name = "number" value = "{{course.catalog_number}}" />
+          <button type="submit" class="btn btn-light">Add Class</button>
+        </form>
+      </div>
+      <div class="column">
+        <a
+          href="{% url 'study_sessions' department=dep number=course.catalog_number %}?name={{course.description}}&professor={{course.instructor.name}}"
+          class="btn btn-light">
+          View Study Sessions
+        </a>
+      </div>
+      <div class="column">
+        <a
+          href="{% url 'create_session' department=dep number=course.catalog_number %}?name={{course.description}}&professor={{course.instructor.name}}"
+          class="btn btn-light">
+          Create Study Session
+        </a>
+      </div>
+    </div>
+
+    <div class="sectionDiv"></div>
+
+    {% endfor %}
+</body>
+
+{% endblock %}

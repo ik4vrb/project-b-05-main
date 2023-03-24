@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Friends{% endblock %}
+{% block content %}
+
+<style>
+    table {
+        border: solid rgba(0, 0, 0, .15);
+    }
+    tr {
+        border-bottom: 1px solid #ddd;
+        background-color : #e08a34;
+    }
+    th {
+        padding: 15px;
+    }
+    td{
+        padding: 15px;
+        color: black;
+        font-family: "Libre Baskerville";
+        font-size: 20px;
+        background-color : white;
+    }
+</style>
+
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1>FRIENDS</h1>
+    <div class="titleDiv"></div>
+    
+    {% if account.friends.all %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Major</th>
+                <th>Minor</th>
+            </tr>
+        {% for friend in account.friends.all %} 
+            <tr>
+                <td>{{ friend.username }}</td>
+                <td>{{ friend.first_name }} {{ friend.last_name }}</td>
+                <td>{{ friend.year }}</td>
+                <td>{{ friend.major }}</td>
+                <td>{{ friend.minor }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>You have no friends yet</p>
+    {% endif %}
+    
+    <br>
+
+    <form action="{% url 'search-users' %}" method="GET">
+        <div class="searchDiv">
+            <input type="text" name="search">
+            <button class="btn btn-light" role="submit">Search for a User</button>
+        </div>
+    </form>
+    <i>Search by username (case sensitive)</i>
+
+</body>
+
+{% endblock %}

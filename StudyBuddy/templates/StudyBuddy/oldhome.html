@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+
+
+
+<body>
+    <div class="container text-dark mt-5"> 
+        <div class="row justify-content-md-center">
+            <div class="col-md-12">
+                <h1>Study Buddy</h1>
+                {% if user.is_authenticated %}
+                <i>Welcome, {{ user.username }}!</i>
+                {% else %}
+                <p>Welcome, please log in first. <a class="nav-link" href="/accounts/login">Log In</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+    {% if user.is_authenticated %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card shadow rounded mb-3">
+          <h5 class="card-header h5">Check Out Your Messages Here!</h5>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <a class="btn button1" href="/inbox">Messages</a>
+            </ul>
+          </div>
+        </div>
+      </div>
+        
+      <div class="col-md-6">
+        <div class="card shadow rounded mb-3">
+            <h5 class="card-header h5">Find a Class Here!</h5>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                  <a class="btn button1" href="/classes">Find a Class</a>
+              </ul>
+            </div>
+        </div>
+	    </div>
+    </div>
+
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card shadow rounded mb-3">
+          <h5 class="card-header h5">Check out your Profile Here!</h5>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <a class="btn button1" href="/profile">Profile</a>
+            </ul>
+          </div>
+        </div>
+      </div>
+        
+      <div class="col-md-6">
+        <div class="card shadow rounded mb-3">
+            <h5 class="card-header h5">Check Out Your Friends Here!</h5>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                  <a class="btn button1" href="/friends">Friends</a>
+              </ul>
+            </div>
+        </div>
+	    </div>
+    </div>
+    {% endif %}
+
+</body>
+{% endblock %}

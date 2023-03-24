@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Study Sessions{% endblock %}
+{% block content %}
+
+<body>
+    <h1>Create Session</h1>
+
+    <form  method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <br>
+        <input type="submit">
+    </form>
+
+    <br/>
+    <i>If there are no members to select, please add friends first</i>
+</body>
+
+{% endblock %}

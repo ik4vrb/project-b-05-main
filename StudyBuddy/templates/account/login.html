@@ -1,0 +1,76 @@
+{# Load the tag library #}
+{% load bootstrap5 %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load i18n %}
+{% load account socialaccount %}
+
+
+
+
+<body stye= >
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .background-image {
+    background-image: url('https://i.postimg.cc/1z3DG7Vm/coffee.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+}
+.signbutton{
+  background-color:#495194;
+  color: white;
+  padding: 30px 60px;
+  text-align: center;
+  font-size: 40px;
+  border-radius: 30px;
+}
+</style>
+<center>
+<div class="background-image">
+
+  <div class="d-flex aligns-items-center justify-content-center">
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    <h1>{% trans "Welcome to UVA Study Buddy!" %}</h1>
+
+    {% get_providers as socialaccount_providers %}
+  
+    {% if socialaccount_providers %}
+      <p style="color: white; font-family:serif; font-size: 20px">{% blocktrans with site.name as site_name %}Please Sign In with Google Below!{% endblocktrans %}</p>
+      <button type="submit" class="signbutton">{% include "socialaccount/snippets/provider_list.html" with process="login" %}</button>
+      <br>
+      <i style="color: white; font-family:serif; font-size: 20px">(If you have not signed in with Google previously, you will be asked to enter additional information.)</i>
+    {% endif %}
+    <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  </div>
+  </div>
+
+</div> 
+</center>
+</body>

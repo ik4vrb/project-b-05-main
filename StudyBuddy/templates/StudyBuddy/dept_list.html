@@ -1,0 +1,458 @@
+{% extends "base.html" %}
+{% block title %}List of Departments{% endblock %}
+{% block content %}
+
+<style>
+  table {
+    border: solid rgba(500, 0, 0, .1);
+  }
+  th {
+    padding: 10px;
+    font-size: 25px;
+    text-align: center;
+  }
+  td {
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid rgba(500, 0, 0, .1);
+    text-align: center;
+  }
+  .card2 {
+    background-color: #e19549;
+    color: white;
+  }
+  a {
+    color: white;
+  }
+
+</style>
+
+<body>
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <h2> DEPARTMENTS </h2>
+  <div class="titleDiv"></div>
+
+  <form action="{% url 'searchDep' %}" method="GET">
+    <div class="searchDiv">
+      <input type="text" name="search" placeholder="Mnemonic ex: MUSI"/>
+      <button type="submit" class="btn btn-light">Search</button>
+    </div>
+  </form>
+
+          <!-- accordion -->
+          <div class="accordion" id="chapters">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-1" aria-expanded="true" aria-controls="chapter-1">
+                  Departments A-D
+                </button>
+              </h2>
+              <div id="chapter-1" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#chapters">
+                <div class="accordion-body">
+                  <div class="row">
+                  <!--Only A's--> 
+                  <div class="col" id="colA"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'A' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseAcol-->
+                  <!--Only B's--> 
+                  <div class="col" id="colB"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'B' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseBcol-->
+                  <!--Only C's--> 
+                  <div class="col" id="colC"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'C' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseCcol-->
+                  <!--Only D's--> 
+                  <div class="col" id="colD"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'D' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseDcol-->
+                </div><!--Close row-->
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-2" aria-expanded="false" aria-controls="chapter-2">
+                  Departments E-H
+                </button>
+              </h2>
+              <div id="chapter-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#chapters">
+                <div class="accordion-body">
+                  <div class="row">
+                    <!--Only E's--> 
+                    <div class="col" id="colE"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'E' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseEcol-->
+                    <!--Only F's--> 
+                    <div class="col" id="colF"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'F' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseFcol-->
+                    <!--Only G's--> 
+                    <div class="col" id="colG"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'G' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseGcol-->
+                    <!--Only H's--> 
+                    <div class="col" id="colH"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'H' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseHcol-->
+                  </div><!--Close row-->
+               </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-3" aria-expanded="false" aria-controls="chapter-1">
+                  Departments I-L
+                </button>
+              </h2>
+              <div id="chapter-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#chapters">
+                <div class="accordion-body">
+                  <div class="row">
+                    <!--Only I's--> 
+                    <div class="col" id="colI"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'I' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseIcol-->
+                    <!--Only J's--> 
+                    <div class="col" id="colJ"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'J' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseJcol-->
+                    <!--Only K's--> 
+                    <div class="col" id="colK"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'K' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseKcol-->
+                    <!--Only L's--> 
+                    <div class="col" id="colL"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'L' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseLcol-->
+                  </div><!--Close row-->
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-4" aria-expanded="false" aria-controls="chapter-4">
+                  Departments M-P
+                </button>
+              </h2>
+              <div id="chapter-4" class="accordion-collapse collapse" aria-labelledby="heading-4" data-bs-parent="#chapters">
+                <div class="accordion-body">
+                  <div class="row">
+                    <!--Only M's--> 
+                    <div class="col" id="colM"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'M' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseMcol-->
+                    <!--Only N's--> 
+                    <div class="col" id="colN"> 
+                      {% for department in departments %}
+                      {% if department.subject|slice:1 == 'N' %}
+                      <div class="row mb-3">
+                        <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                          <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                        </div>
+                      </div>
+                      {% endif %} 
+                      {% endfor %}
+                      </div><!--CloseNcol-->
+                    <!--Only O's--> 
+                    <div class="col" id="colO"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'O' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseOcol-->
+                    <!--Only P's--> 
+                    <div class="col" id="colP"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'P' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--ClosePcol-->
+                  </div><!--Close row-->
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-5" aria-expanded="false" aria-controls="chapter-5">
+                  Departments Q-T
+                </button>
+              </h2>
+              <div id="chapter-5" class="accordion-collapse collapse" aria-labelledby="heading-5" data-bs-parent="#chapters">
+                <div class="accordion-body">
+                  <div class="row">
+                    <!--Only Q's--> 
+                    <div class="col" id="colQ"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'Q' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseQcol-->
+                    <!--Only R's--> 
+                    <div class="col" id="colR"> 
+                      {% for department in departments %}
+                      {% if department.subject|slice:1 == 'R' %}
+                      <div class="row mb-3">
+                        <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                          <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                        </div>
+                      </div>
+                      {% endif %} 
+                      {% endfor %}
+                      </div><!--CloseRcol-->
+                    <!--Only S's--> 
+                    <div class="col" id="colS"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'S' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseScol-->
+                    <!--Only T's--> 
+                    <div class="col" id="colT"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'T' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseTcol-->
+                  </div><!--Close row-->
+                </div>
+              </div>
+            </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-6">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-6" aria-expanded="false" aria-controls="chapter-6">
+                Departments U-X
+              </button>
+            </h2>
+            <div id="chapter-6" class="accordion-collapse collapse" aria-labelledby="heading-6" data-bs-parent="#chapters">
+              <div class="accordion-body">
+                <div class="row">
+                  <!--Only U's--> 
+                  <div class="col" id="colU"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'U' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseUcol-->
+                  <!--Only V's--> 
+                  <div class="col" id="colV"> 
+                    {% for department in departments %}
+                    {% if department.subject|slice:1 == 'V' %}
+                    <div class="row mb-3">
+                      <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                        <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                      </div>
+                    </div>
+                    {% endif %} 
+                    {% endfor %}
+                    </div><!--CloseVcol-->
+                  <!--Only W's--> 
+                  <div class="col" id="colW"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'W' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseWcol-->
+                  <!--Only X's--> 
+                  <div class="col" id="colX"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'X' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseXcol-->
+                </div><!--Close row-->
+              </div>
+            </div>
+          </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-7">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chapter-7" aria-expanded="false" aria-controls="chapter-7">
+              Departments Y-Z
+            </button>
+          </h2>
+          <div id="chapter-7" class="accordion-collapse collapse" aria-labelledby="heading-7" data-bs-parent="#chapters">
+            <div class="accordion-body">
+              <div class="row">
+                <!--Only Y's--> 
+                <div class="col" id="colY"> 
+                {% for department in departments %}
+                {% if department.subject|slice:1 == 'Y' %}
+                <div class="row mb-3">
+                  <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                    <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                  </div>
+                </div>
+                {% endif %} 
+                {% endfor %}
+                </div><!--CloseYcol-->
+                <!--Only Z's--> 
+                <div class="col" id="colZ"> 
+                  {% for department in departments %}
+                  {% if department.subject|slice:1 == 'Z' %}
+                  <div class="row mb-3">
+                    <div class="card2 col-md-6 offset-md-3 p-1 shadow-sm">
+                      <p><a href={{department.subject}}>{{ department.subject}}</a></p>
+                    </div>
+                  </div>
+                  {% endif %} 
+                  {% endfor %}
+                  </div><!--CloseZcol-->
+                <div class="col" id="col1"></div>
+                <div class="col" id="col2"></div>
+              </div><!--Close row-->
+            </div>
+          </div>
+        </div> 
+      </div>
+  
+<!--end accordion-->
+</body>
+{% endblock %}

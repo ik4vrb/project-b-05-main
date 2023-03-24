@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Study Sessions{% endblock %}
+{% block content %}
+
+<style>
+    table {
+        border: solid rgba(0, 0, 0, .15);
+    }
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+    th, td {
+        padding: 15px;
+    }
+</style>
+
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2> {{ course.name.upper }} STUDY SESSIONS </h2>
+
+    <div class="titleDiv"></div>
+
+    <a
+        href="{% url 'create_session' department=course.department number=course.number %}?name={{course.name}}&professor={{course.professor}}"
+        class="btn btn-light">
+        Create Study Session
+    </a>
+    
+    <div class="sectionDiv"></div>
+
+    {% if course.study_sessions.all %}
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Topic</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Members</th>
+            <th></th>
+        </tr>
+        {% for session in course.study_sessions.all %}
+            <tr>
+                <td>{{ session.course.name }}</td>
+                <td>{{ session.topic }}</td>
+                <td>{{ session.date }}</td>
+                <td>{{ session.time }}</td>
+                <td>
+                    {% for member in session.members.all %}
+                        <p>@{{ member.username }}</p>
+                    {% endfor %}
+                </td>
+                <td>
+                    <form action="{% url 'study_sessions' course.department course.number %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="name" value="{{ session.course.name }}">
+                        <input type="hidden" name="topic" value="{{ session.topic }}">
+                        <button class="btn btn-light">Join Session</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sectionDiv"></div>
+
+    {% else %}
+        <p>There are no study sessions for this course!</p>
+    {% endif %}
+</body>
+
+{% endblock %}

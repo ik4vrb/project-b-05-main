@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}class{% endblock %}
+{% block content %}
+
+<body>
+    <h1>SEARCH RESULTS</h1>
+    <div class="titleDiv"></div>
+    {% if result %}
+        {% for dep in result %}
+            <h4><a href="{% url 'show_classes' dep.subject %}">{{ dep.subject }}</a> </h4>
+        {% endfor %}
+    {% else %}
+        <h4>No Result</h4>
+    <br>
+        <i>Make sure your search is the <b> department mnemonic</b> or part of it as shown on SIS</i>
+    <br>
+        <i>i.e CS, ARCH</i>
+        <form action="{% url 'dept_list' %}" method="POST">
+            {% csrf_token %}
+            <br>
+            <button type="submit" class="btn btn-light">Return to Department List</button>
+        </form>
+    {% endif %}
+</body>
+
+{% endblock %}

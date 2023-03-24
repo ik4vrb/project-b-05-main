@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Class Search{% endblock %}
+{% block content %}
+
+<style>
+  .row {
+    justify-content: center;
+  }
+  .column {
+    width: 200px;
+  }
+</style>
+
+<body>
+    <h1>SEARCH RESULTS</h1>
+    <div class="titleDiv"></div>
+    {% if object_list %}
+        {% for course in object_list %}
+        <b> {{course.subject}} {{course.catalog_number}} </b>
+        <i>{{course.description}}</i>
+
+        {% for detail in course.meetings %}
+            <p> {{detail.days}} {{detail.start_time}} - {{detail.end_time}}</p>
+        {% endfor %}
+
+        <div class="row">
+            <div class="column">
+              <form action="{% url 'show_classes' course.subject %}" method="POST">
+                {% csrf_token %}
+                <input type = "hidden" name = "name" value = "{{course.description}}" />
+                <input type = "hidden" name = "professor" value = "{{course.instructor.name}}" />
+                <input type = "hidden" name = "number" value = "{{course.catalog_number}}" />
+                <button type="submit" class="btn btn-light">Add Class</button>
+             </form>
+          </div>
+          <div class="column">
+              <a href="{% url 'study_sessions' department=course.subject number=course.catalog_number %}?name={{course.description}}&professor={{course.instructor.name}}" class="btn btn-light">View Study Sessions</a>
+          </div>
+          <div class="column">
+              <a href="{% url 'create_session' department=course.subject number=course.catalog_number %}?name={{course.description}}&professor={{course.instructor.name}}" class="btn btn-light">Create Study Session</a>
+          </div>
+        </div>
+        <div class="sectionDiv"></div>
+        {% endfor %}
+    {% else %}
+        <h4>No Result</h4>
+    <br>
+        <i>Make sure your search is the <b> catalogue number </b> for your course or part of it as shown on SIS</i>
+    <br>
+    <i> i.e 3100, 2110 </i>
+        <form action="{% url 'show_classes' department %}" method="GET">
+            <br>
+            <button type="submit" class="btn btn-light">Return to Department Page</button>
+        </form>
+    {% endif %}
+</body>
+
+{% endblock %}

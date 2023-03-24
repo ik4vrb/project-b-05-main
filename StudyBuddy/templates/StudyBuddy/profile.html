@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+<style>
+    table {
+        border: solid rgba(0, 0, 0, 0);
+    }
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+    th, td {
+        padding: 15px;
+    }
+    .minimalpad{
+        padding: 0px;
+        margin: 0px;
+    }
+</style>
+<body>
+    <!--user info row2-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow rounded mb-3">
+              <h2 class="card-infoDisplay shadow rounded mb-3">{{ account.username }}'s Info:</h2>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <table>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email Address</th>
+                            <th>Name</th>
+                            <th>Year</th>
+                            <th>Major</th>
+                            <th>Minor</th>
+                        </tr>
+                        <tr>
+                            <td>{{ account.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ account.first_name }} {{ account.last_name }}</td>
+                            <td>{{ account.year }}</td>
+                            <td>{{ account.major }}</td>
+                            <td>{{ account.minor }}</td>
+                        </tr>
+                    </table>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="row">
+        <!--left column-->
+        <div class="col-md-4">
+                <div class="card shadow rounded mb-3">
+                  <h2 class="card-infoDisplay shadow rounded mb-3">My Courses:</h2>
+                  <div class="card-body">
+                    {% for course in account.courses.all %}
+                        <div class="row">
+                            <p style="margin: 0;"><strong>{{ course.department }}{{ course.number }}</strong> with {{ course.professor }}</p>
+                            <p style="margin: 0;"><em>"{{ course.name }}"</em></p>
+                        </div>
+                        <br>
+                    {% endfor %}
+                  </div>
+             </div>
+        </div>
+
+        <!--right column-->
+        <div class="col-md-8">
+            <div class="card shadow rounded mb-3">
+              <h2 class="card-infoDisplay shadow rounded mb-3">My Study Sessions:</h2>
+              <div class="card-body">
+                    <table>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Topic</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Leave</th>
+                            <th> 
+                                <center>
+                                <p class="minimalpad">Delete</p>
+                                <p class="minimalpad">(This is a</p>
+                                <p class="minimalpad">Permanent Action)</p>
+                            </center>
+                            </th>
+
+                        </tr>
+                        {% for session in account.study_sessions.all %}
+                            
+                                <tr>
+                                    <div class="row">
+                                    <td>{{ session.course.name }}</td>
+                                    <td>{{ session.topic }}</td>
+                                    <td>{{ session.date }}</td>
+                                    <td>{{ session.time }}</td>
+                                    </div>
+                                    <div class="row">
+                                    <td>
+                                        <form action="{% url 'profile' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="leave">
+                                            <input type="hidden" name="course" value="{{ session.course.name }}">
+                                            <input type="hidden" name="topic" value="{{ session.topic }}">
+                                            <button class="button1 btn-light" role="submit">Leave Session</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{% url 'profile' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="course" value="{{ session.course.name }}">
+                                            <input type="hidden" name="topic" value="{{ session.topic }}">
+                                            <button class="button1 btn-light" role="submit">Delete Session</button>
+                                        </form>  
+                                    </td>
+                                    </div>
+                                </tr>
+                            
+                        {% endfor %}
+                    </table>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+</body>
+
+{% endblock %}

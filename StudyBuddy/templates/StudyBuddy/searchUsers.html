@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Search Users{% endblock %}
+{% block content %}
+
+<style>
+    table {
+        border: solid rgba(0, 0, 0, .15);
+    }
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+    th, td {
+        padding: 15px;
+    }
+</style>
+
+<body>
+    <h1>SEARCH RESULTS</h1>
+    <div class="titleDiv"></div>
+
+    {% if object_list %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Year</th>
+                <th>Major</th>
+                <th>Minor</th>
+            </tr>
+        {% for account in object_list %} 
+            <tr>
+                <td>{{ account.username }}</td>
+                <td>{{ account.first_name }}</td>
+                <td>{{ account.last_name }}</td>
+                <td>{{ account.year }}</td>
+                <td>{{ account.major }}</td>
+                <td>{{ account.minor }}</td>
+                <td>
+                    <form action="{% url 'friends' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value="{{account.username}}">
+                        <button class="btn btn-light" role="submit">Add Friend</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>No search results</p>
+    {% endif %}
+</body>
+
+{% endblock %}

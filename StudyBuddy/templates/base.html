@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{# Load the tag library #}
+{% load bootstrap5 %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<html>
+<center>
+<head>
+    <title>  {% block title %}{% endblock %}  </title>
+    {% load static %}
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+</head>
+<body style="background-color:#c1c3d6">  
+    {% if user.is_authenticated %}
+    {% include 'navbar.html' %}
+    {% endif %}
+    <div class="container"><br>
+    {% block content %}
+    </div>
+    {% endblock %}
+</body>
+</center>
+</html>
