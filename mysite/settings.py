@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-d2(k_+e4qei&y8u=uvoal-*95k!r+tc)0vn-o=ivp@imtfxd-8
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'project3240.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'study-buddy-ik.herokuapp.com']
 
 # Application definition
 INSTALLED_APPS = [
